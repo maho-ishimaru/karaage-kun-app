@@ -7,10 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import org.jsoup.Jsoup
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,15 +23,10 @@ class MainActivity : AppCompatActivity() {
 
         lifecycleScope.launch(handler) {
             try {
-                val doc = withContext(Dispatchers.IO) {
-                    Jsoup.connect("https://www.lawson.co.jp/lab/karaagekun/").timeout(10000).get()
-                }
-                val info = doc.select("p.lab_top_title_slider").text()
+                val info = KaraageKunScraper.fetchKaraageKunInfo()
                 Log.d("KaraageKunInfo", info) // ログ出力
 
-                withContext(Dispatchers.Main) {
-                    infoTextView.text = info
-                }
+                infoTextView.text = info
             } catch (e: Exception) {
                 e.printStackTrace()
             }
