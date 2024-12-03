@@ -20,5 +20,24 @@ class MainActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
         binding.viewModel = viewModel
+
+        setupInfiniteScrolling()
+    }
+
+    private fun setupInfiniteScrolling() {
+        binding.calendarRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+                val totalItemCount = layoutManager.itemCount
+                val lastVisibleItem = layoutManager.findLastVisibleItemPosition()
+
+                if (lastVisibleItem >= totalItemCount - 1) {
+                    viewModel.loadNextMonth()
+                } else if (layoutManager.findFirstVisibleItemPosition() == 0) {
+                    viewModel.loadPreviousMonth()
+                }
+            }
+        })
     }
 }

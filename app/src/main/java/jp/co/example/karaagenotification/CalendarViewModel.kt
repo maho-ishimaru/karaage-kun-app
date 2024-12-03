@@ -59,6 +59,16 @@ class CalendarViewModel : ViewModel() {
         calendar.add(Calendar.MONTH, -1)
         updateCalendar()
     }
+
+    fun loadNextMonth() {
+        calendar.add(Calendar.MONTH, 1)
+        updateCalendar()
+    }
+
+    fun loadPreviousMonth() {
+        calendar.add(Calendar.MONTH, -1)
+        updateCalendar()
+    }
 }
 
 data class Day(val day: Int, val isHoliday: Boolean)
