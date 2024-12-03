@@ -19,6 +19,7 @@ class CalendarViewModel : ViewModel() {
     val selectedDay: StateFlow<Day?> get() = _selectedDay
 
     private val calendar = Calendar.getInstance()
+    private val calendarRepository = CalendarRepository()
 
     init {
         updateCalendar()
@@ -40,9 +41,9 @@ class CalendarViewModel : ViewModel() {
         }
     }
 
-    private fun isHoliday(year: Int, month: Int, day: Int): Boolean {
-        // Implement holiday logic here
-        return false
+    private suspend fun isHoliday(year: Int, month: Int, day: Int): Boolean {
+        val holidays = calendarRepository.fetchHolidays(year, month)
+        return holidays.any { it.day == day }
     }
 
     fun selectDay(day: Day) {
