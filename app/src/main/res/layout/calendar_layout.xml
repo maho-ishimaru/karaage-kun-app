@@ -14,87 +14,15 @@
         android:layout_gravity="center_horizontal"
         android:paddingBottom="16dp"/>
 
-    <GridLayout
-        android:id="@+id/calendarGrid"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/calendarRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:columnCount="7"
-        android:rowCount="6"
-        android:layout_gravity="center_horizontal">
-
-        <!-- Add TextView elements for each day of the month -->
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_columnWeight="1"
-            android:gravity="center"
-            android:text="@{String.valueOf(day.day)}"
-            android:textColor="@{day.isHoliday ? @android:color/holo_red_dark : @android:color/black}"
-            android:background="@{viewModel.selectedDay == day ? @android:color/holo_orange_light : @android:color/transparent}"
-            android:onClick="@{() -> viewModel.selectDay(day)}" />
-
-        <!-- Add more TextView elements for the remaining days of the month -->
-
-    </GridLayout>
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="7"
+        tools:listitem="@layout/item_day" />
 
 </LinearLayout>
