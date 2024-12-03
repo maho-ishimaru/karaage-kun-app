@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class CalendarAdapter(
-    private val days: List<Day>,
+    private var days: List<Day>,
     private val onDayClick: (Day) -> Unit
 ) : RecyclerView.Adapter<CalendarAdapter.DayViewHolder>() {
 
@@ -27,9 +27,19 @@ class CalendarAdapter(
             notifyDataSetChanged()
             onDayClick(day)
         }
+
+        if (position == days.size - 1) {
+            // Load next month's data when the user scrolls to the end
+            onDayClick(Day(-1, false)) // Placeholder to trigger loading next month
+        }
     }
 
     override fun getItemCount(): Int = days.size
+
+    fun updateDays(newDays: List<Day>) {
+        days = newDays
+        notifyDataSetChanged()
+    }
 
     inner class DayViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val dayTextView: TextView = itemView.findViewById(R.id.dayTextView)

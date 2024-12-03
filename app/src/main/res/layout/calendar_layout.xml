@@ -25,4 +25,14 @@
         app:spanCount="7"
         tools:listitem="@layout/item_day" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/infiniteScrollRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:listitem="@layout/item_day" />
+
 </LinearLayout>
